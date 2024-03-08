@@ -33,9 +33,9 @@ class ThreeDDataset(BaseDataset):
         Returns:
             the modified parser.
         """
-        parser.add_argument('--cells_x', type=int, default=58, help='number of cells x direction')
-        parser.add_argument('--cells_y', type=int, default=58, help='number of cells y direction')
-        parser.add_argument('--cells_z', type=int, default=58, help='number of cells z direction')
+        parser.add_argument('--cells_x', type=int, default=48, help='number of cells x direction')
+        parser.add_argument('--cells_y', type=int, default=48, help='number of cells y direction')
+        parser.add_argument('--cells_z', type=int, default=48, help='number of cells z direction')
 
 
         return parser
@@ -74,8 +74,8 @@ class ThreeDDataset(BaseDataset):
         Step 4: return a data point as a dictionary.
         """
         path = self.image_paths[index]    # needs to be a string
-        data_A = torch.tensor(h5py.File(path, 'r').get('data')[0:opt.cells_x, opt.cells_y+1:opt.cells_y*2, 0:opt.cells_z])   # needs to be a tensor
-        data_B = torch.tensor(h5py.File(path, 'r').get('data')[0:opt.cells_x,0:opt.cells_y,0:opt.cells_z])    # needs to be a tensor
+        data_A = torch.tensor(h5py.File(path, 'r').get('data')[opt.cells_x + 1: 2 * opt.cells_x, 0:opt.cells_y, 0:opt.cells_z])   # needs to be a tensor
+        data_B = torch.tensor(h5py.File(path, 'r').get('data')[0:opt.cells_x, 0:opt.cells_y, 0:opt.cells_z])    # needs to be a tensor
         return {'data_A': data_A, 'data_B': data_B, 'path': path}
 
     def __len__(self):
