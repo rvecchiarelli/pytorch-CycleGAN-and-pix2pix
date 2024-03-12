@@ -741,9 +741,9 @@ class Unet3dSkipConnectionBlock(nn.Module):
 
     def forward(self, x):
         if self.outermost:
-            return self.model(x)
+            return self.model(x.float())
         else:   # add skip connections
-            return torch.cat([x, self.model(x)], 1)
+            return torch.cat([x.float(), self.model(x.float())], 1)
         
 
 

@@ -1,0 +1,34 @@
+{
+    
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: train.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["--dataroot", "C:/Users/bekve/OneDrive/Documents/School/PostGrad Stuff/Semester 5/Master Thesis/Data/cooling47_hdf5", 
+            "--name", "3dtrial", 
+            "--model", "pix2pix", 
+            "--netG", "unet3d", 
+            "--netD", "basic3d", 
+            "--norm", "instance3d", 
+            "--input_nc", "1", 
+            "--output_nc", "1", 
+            "--display_id", "-1", 
+            "--direction", "BtoA", 
+            "--gpu_ids", "-1", 
+            "--n_epochs", "1", 
+            "--n_epochs_decay", "1", 
+            "--preprocess", "none", 
+            "--dataset_mode", "threed", 
+            "--print_freq", "1",
+			"--batch_size", "2"]
+
+
+
+
+        }
+    ]
+}

@@ -58,8 +58,10 @@ class ThreeDDataset(BaseDataset):
         self.image_paths = sorted(make_dataset(self.dir_paths, opt.max_dataset_size)) # get the image directory  # You can call sorted(make_dataset(self.root, opt.max_dataset_size)) to get all the image paths under the directory self.root
         # define the default transform function. You can use <base_dataset.get_transform>; You can also define your custom transform function
         #self.transform = get_transform(opt)
+        self.input_nc = self.opt.output_nc if self.opt.direction == 'BtoA' else self.opt.input_nc
+        self.output_nc = self.opt.input_nc if self.opt.direction == 'BtoA' else self.opt.output_nc
 
-    def __getitem__(self, index, opt):
+    def __getitem__(self, index):
         """Return a data point and its metadata information.
 
         Parameters:
@@ -74,9 +76,11 @@ class ThreeDDataset(BaseDataset):
         Step 4: return a data point as a dictionary.
         """
         path = self.image_paths[index]    # needs to be a string
-        data_A = torch.tensor(h5py.File(path, 'r').get('data')[opt.cells_x + 1: 2 * opt.cells_x, 0:opt.cells_y, 0:opt.cells_z])   # needs to be a tensor
-        data_B = torch.tensor(h5py.File(path, 'r').get('data')[0:opt.cells_x, 0:opt.cells_y, 0:opt.cells_z])    # needs to be a tensor
-        return {'data_A': data_A, 'data_B': data_B, 'path': path}
+        #f = h5py.File(path, 'r').get('dataset_1')
+        data_A = torch.reshape(torch.tensor(h5py.File(path, 'r').get('data_A')), (1,48,48,48))
+        #print(torch.Tensor.size(data_A))  # needs to be a tensor
+        data_B = torch.reshape(torch.tensor(h5py.File(path, 'r').get('data_B')), (1,48,48,48))    # needs to be a tensor
+        return {'A': data_A, 'B': data_B, 'A_paths': path, 'B_paths': path}
 
     def __len__(self):
         """Return the total number of images."""
