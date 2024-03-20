@@ -4,6 +4,8 @@ import torch
 import numpy as np
 from PIL import Image
 import os
+from data.base_dataset import BaseDataset
+import h5py
 
 
 def tensor2im(input_image, imtype=np.uint8):
@@ -22,6 +24,24 @@ def tensor2im(input_image, imtype=np.uint8):
         if image_numpy.shape[0] == 1:  # grayscale to RGB
             image_numpy = np.tile(image_numpy, (3, 1, 1))
         image_numpy = (np.transpose(image_numpy, (1, 2, 0)) + 1) / 2.0 * 255.0  # post-processing: tranpose and scaling
+    else:  # if it is a numpy array, do nothing
+        image_numpy = input_image
+    return image_numpy.astype(imtype)
+
+def tensor2im_hdf5(input_image, imtype=np.uint8):
+    """"Converts a Tensor array into a numpy image array.
+
+    Parameters:
+        input_image (tensor) --  the input image tensor array
+        imtype (type)        --  the desired type of the converted numpy array
+    """
+    if not isinstance(input_image, np.ndarray):
+        if isinstance(input_image, torch.Tensor):  # get the data from a variable
+            image_tensor = input_image.data
+        else:
+            return input_image
+        image_numpy = image_tensor[0].cpu().float().numpy()  # convert it into a numpy array
+        
     else:  # if it is a numpy array, do nothing
         image_numpy = input_image
     return image_numpy.astype(imtype)
@@ -47,6 +67,8 @@ def diagnose_network(net, name='network'):
 
 
 def save_image(image_numpy, image_path, aspect_ratio=1.0):
+
+    
     """Save a numpy image to the disk
 
     Parameters:
@@ -62,6 +84,21 @@ def save_image(image_numpy, image_path, aspect_ratio=1.0):
     if aspect_ratio < 1.0:
         image_pil = image_pil.resize((int(h / aspect_ratio), w), Image.BICUBIC)
     image_pil.save(image_path)
+
+def save_image_hdf5(image_numpy, image_path):
+
+    
+    """Save a numpy image to the disk
+
+    Parameters:
+        image_numpy (numpy array) -- input numpy array
+        image_path (str)          -- the path of the image
+    """
+    
+    hf = h5py.File(image_path, 'w')
+    hf.create_dataset('data', data=image_numpy)
+    hf.close()
+
 
 
 def print_numpy(x, val=True, shp=False):

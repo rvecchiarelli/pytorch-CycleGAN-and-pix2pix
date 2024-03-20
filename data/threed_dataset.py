@@ -18,8 +18,7 @@ import os
 from data.image_folder import make_dataset
 import h5py
 import torch
-import math
-import torch.nn as nn
+
 
 
 class ThreeDDataset(BaseDataset):
