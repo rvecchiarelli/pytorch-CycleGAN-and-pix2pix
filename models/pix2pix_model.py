@@ -5,7 +5,7 @@ from . import networks
 
 class Pix2PixModel(BaseModel):
     """ This class implements the pix2pix model, for learning a mapping from input images to output images given paired data.
-
+    
     The model training requires '--dataset_mode aligned' dataset.
     By default, it uses a '--netG unet256' U-Net generator,
     a '--netD basic' discriminator (PatchGAN),
@@ -13,6 +13,7 @@ class Pix2PixModel(BaseModel):
 
     pix2pix paper: https://arxiv.org/pdf/1611.07004.pdf
     """
+    torch.autograd.set_detect_anomaly(True)
     @staticmethod
     def modify_commandline_options(parser, is_train=True):
         """Add new dataset-specific options, and rewrite default values for existing options.
@@ -102,6 +103,7 @@ class Pix2PixModel(BaseModel):
         self.loss_D.backward()
 
     def backward_G(self):
+        
         """Calculate GAN and L1 loss for the generator"""
         # First, G(A) should fake the discriminator
         fake_AB = torch.cat((self.real_A, self.fake_B), 1)

@@ -24,8 +24,9 @@
             "--preprocess", "none", 
             "--dataset_mode", "threed", 
             "--print_freq", "1",
-			"--batch_size", "2"]
-
+			"--batch_size", "1",
+            "--load_size", "48",
+            "--crop_size","48"]
 
 
 
