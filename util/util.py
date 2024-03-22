@@ -28,7 +28,7 @@ def tensor2im(input_image, imtype=np.uint8):
         image_numpy = input_image
     return image_numpy.astype(imtype)
 
-def tensor2im_hdf5(input_image, imtype=np.uint8):
+def tensor2im_hdf5(input_image, imtype=float):
     """"Converts a Tensor array into a numpy image array.
 
     Parameters:

@@ -74,7 +74,7 @@ def save_images_hdf5(webpage, visuals, image_path, aspect_ratio=1.0, width=256, 
         im = util.tensor2im_hdf5(im_data)
         image_name = '%s_%s.h5' % (name, label)
         save_path = os.path.join(image_dir, image_name)
-        util.save_image_hdf5(im, save_path, aspect_ratio=aspect_ratio)
+        util.save_image_hdf5(im, save_path)
         ims.append(image_name)
         txts.append(label)
         links.append(image_name)
