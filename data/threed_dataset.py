@@ -18,6 +18,7 @@ import os
 from data.image_folder import make_dataset
 import h5py
 import torch
+import numpy as np
 
 
 
@@ -80,11 +81,11 @@ class ThreeDDataset(BaseDataset):
 
         path = self.image_paths[index]    # needs to be a string
         #f = h5py.File(path, 'r').get('dataset_1')
-        data_A = torch.reshape(torch.tensor(h5py.File(path, 'r').get('data_A'))[0:32,0:32,0:32], (1,32,32,32))
+        data_A = torch.reshape(torch.tensor(np.array(h5py.File(path, 'r').get('data_A')))[0:32,0:32,0:32], (1,32,32,32))
         #data_A = torch.reshape(torch.tensor(h5py.File(path, 'r').get('data_A')), (1,48,48,48))
         #print(torch.Tensor.size(data_A))  # needs to be a tensor
 
-        data_B = torch.reshape(torch.tensor(h5py.File(path, 'r').get('data_B'))[0:32,0:32,0:32], (1,32,32,32))
+        data_B = torch.reshape(torch.tensor(np.array(h5py.File(path, 'r').get('data_B')))[0:32,0:32,0:32], (1,32,32,32))
         #data_B = torch.reshape(torch.tensor(h5py.File(path, 'r').get('data_B')), (1,48,48,48))    # needs to be a tensor
 
         return {'A': data_A, 'B': data_B, 'A_paths': path, 'B_paths': path}
