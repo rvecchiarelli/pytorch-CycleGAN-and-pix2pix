@@ -79,6 +79,8 @@ class ThreeDUVWDataset(BaseDataset):
         """
 
 
+
+
         path = self.image_paths[index]    # needs to be a string
         #f = h5py.File(path, 'r').get('dataset_1')
         #data_A = torch.reshape(torch.tensor(np.array(h5py.File(path, 'r').get('data_A')))[0:32,0:32,0:32], (3,32,32,32))
@@ -86,6 +88,7 @@ class ThreeDUVWDataset(BaseDataset):
         data_A = torch.reshape(torch.tensor(np.array(h5py.File(path, 'r').get('data_A'))), (1, 32,32,32)) # needs to be a tensor
 
         data_B = torch.tensor(np.array(h5py.File(path, 'r').get('data_B'))) # needs to be a tensor
+        
 
         return {'A': data_A, 'B': data_B, 'A_paths': path, 'B_paths': path}
 

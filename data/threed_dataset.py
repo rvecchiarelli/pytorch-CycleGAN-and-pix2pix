@@ -77,11 +77,12 @@ class ThreeDDataset(BaseDataset):
         Step 3: convert your data to a PyTorch tensor. You can use helpder functions such as self.transform. e.g., data = self.transform(image)
         Step 4: return a data point as a dictionary.
         """
-
+        
 
         path = self.image_paths[index]    # needs to be a string
         #f = h5py.File(path, 'r').get('dataset_1')
         data_A = torch.reshape(torch.tensor(np.array(h5py.File(path, 'r').get('data_A')))[0:32,0:32,0:32], (3,32,32,32))
+        
 
         #data_A = torch.reshape(torch.tensor(h5py.File(path, 'r').get('data_A')), (1,48,48,48))
         #print(torch.Tensor.size(data_A))  # needs to be a tensor

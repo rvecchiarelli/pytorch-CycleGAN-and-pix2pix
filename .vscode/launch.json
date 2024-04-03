@@ -9,18 +9,17 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "args": ["--dataroot", "C:/Users/bekve/OneDrive/Documents/School/PostGrad Stuff/Semester 5/Master Thesis/Data/cooling2000_hdf53d", 
-			"--direction", "AtoB", 
-			"--netG", "unet3d", 
-			"--netD", "basic3d", 
-			"--model", "pix2pix", 
-			"--name", "3dtrial",  
-			"--norm", "instance3d", 
-			"--load_size", "48",
-			"--results_dir", "C:/Users/bekve/OneDrive/Documents/School/PostGrad Stuff/Semester 5/Master Thesis/Data/cooling2000_hdf53d_results",
+            "--name", "3dtrial", 
+            "--model", "pix2pix", 
+            "--netG", "unet3d", 
+            "--netD", "basic3d", 
+            "--norm", "instance3d", 
+            "--direction", "AtoB", 
+			"--results_dir", "C:/Users/bekve/OneDrive/Documents/School/PostGrad Stuff/Semester 5/Master Thesis/Data/cooling2000_hdf5_results",
 			"--preprocess","none",
-			"--input_nc", "1",
-			"--output_nc", "3",
-            "--dataset_mode", "threedUVW"] 
+			"--input_nc", "1", 
+            "--output_nc", "3", 
+            "--dataset_mode","threedUVW"]
 
 
 
