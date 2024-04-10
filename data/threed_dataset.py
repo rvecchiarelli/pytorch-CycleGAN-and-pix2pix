@@ -86,7 +86,7 @@ class ThreeDDataset(BaseDataset):
 
         #data_A = torch.reshape(torch.tensor(h5py.File(path, 'r').get('data_A')), (1,48,48,48))
         #print(torch.Tensor.size(data_A))  # needs to be a tensor
-        data_B = torch.reshape(torch.tensor(h5py.File(path, 'r').get('data_B')), (1,32,32,32))    # needs to be a tensor
+        data_B = torch.reshape(torch.tensor(np.array(h5py.File(path, 'r').get('data_B'))), (1,32,32,32))    # needs to be a tensor
 
         return {'A': data_A, 'B': data_B, 'A_paths': path, 'B_paths': path}
 
