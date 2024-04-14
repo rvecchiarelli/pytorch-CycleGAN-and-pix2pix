@@ -40,8 +40,8 @@ def tensor2im_hdf5(input_image, imtype=float):
             image_tensor = input_image.data
         else:
             return input_image
-        image_numpy = image_tensor[0].cpu().float().numpy()  # convert it into a numpy array
-        image_numpy = ((image_numpy+1)/2.0)*255
+        #image_numpy = image_tensor[0].cpu().float().numpy()  # convert it into a numpy array
+        #image_numpy = ((image_numpy+1)/2.0)*255
         
     else:  # if it is a numpy array, do nothing
         image_numpy = input_image
