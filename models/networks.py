@@ -841,6 +841,43 @@ class NLayer3dDiscriminator(nn.Module):
         """Standard forward."""
         return self.model(input.float())
     
+## 1D Mass Balance Loss
+class Umass(nn.Module):
+    def __init__(self):
+        super(Umass, self).__init__()
+        self.coef = torch.tensor((1/(1*(256-2)*(256-2))))
 
+    def forward(self,fake_data,real_data):
+        fake_data = torch.Tensor.permute(fake_data, (1,2,0))
+        real_data = torch.Tensor.permute(real_data, (1,2,0))
+         
+        diff = torch.abs((0.5 * (real_data[1:-1, 2:] - real_data[1:-1, :-2]))- (0.5 * (fake_data[1:-1, 2:] - fake_data[1:-1, :-2]))).sum()
+        
+        L_mass = self.coef * diff
+        
+        return L_mass
+    
+## 3D Mass Balance Loss
+class Umass3D(nn.Module):
+    def __init__(self):
+        super(Umass, self).__init__()
+        self.coef = torch.tensor((1/(1*(64-2)*(64-2)*(64-2))))
 
+    def forward(self,fake_data,real_data):
+        fake_data = torch.Tensor.permute(fake_data, (0,1,2))
+        real_data = torch.Tensor.permute(real_data, (0,1,2))
+
+        du_real_data = 0.5 * (real_data[1:-1, 2:, :] - real_data[1:-1, :-2, :])
+        dv_real_data = 0.5 * (real_data[2:, 1:-1, :] - real_data[:-2, 1:-1, :])
+        dw_real_data = 0.5 * (real_data[:, 1:-1, 2:] - real_data[:, 1:-1, :-2])
+        du_fake_data = 0.5 * (fake_data[1:-1, 2:, :] - fake_data[1:-1, :-2, :])
+        dv_fake_data = 0.5 * (fake_data[2:, 1:-1, :] - fake_data[:-2, 1:-1, :])
+        dw_fake_data = 0.5 * (fake_data[:, 1:-1, 2:] - fake_data[:, 1:-1, :-2])
+
+         
+        diff = torch.abs((du_real_data + dv_real_data + dw_real_data)- (du_fake_data + dv_fake_data + dw_fake_data)).sum()
+        
+        L_mass3D = self.coef * diff
+        
+        return L_mass3D
         
