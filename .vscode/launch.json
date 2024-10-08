@@ -3,23 +3,28 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: test.py",
+            "name": "Python Debugger: train.py",
             "type": "debugpy",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["--dataroot", "C:/Users/bekve/OneDrive/Documents/School/PostGrad Stuff/Semester 5/Master Thesis/Data/cooling2000_hdf53d", 
+            "args": ["--dataroot", "C:/Users/bekve/OneDrive/Documents/School/PostGrad Stuff/Semester 5/Master Thesis/Data/cooling2000_hdf5", 
             "--name", "3dtrial", 
             "--model", "pix2pix", 
             "--netG", "unet3d", 
             "--netD", "basic3d", 
             "--norm", "instance3d", 
-            "--direction", "AtoB", 
-			"--results_dir", "C:/Users/bekve/OneDrive/Documents/School/PostGrad Stuff/Semester 5/Master Thesis/Data/cooling2000_hdf5_results",
-			"--preprocess","none",
-			"--input_nc", "1", 
-            "--output_nc", "3", 
-            "--dataset_mode","threedUVW"]
+            "--input_nc", "1", 
+            "--output_nc", "1", 
+            "--display_id", "-1", 
+            "--direction", "BtoA", 
+            "--gpu_ids", "-1", 
+            "--n_epochs", "1", 
+            "--n_epochs_decay", "1", 
+            "--preprocess", "none", 
+            "--dataset_mode", "threed", 
+            "--print_freq", "1",
+			"--batch_size", "1"]
 
 
 
