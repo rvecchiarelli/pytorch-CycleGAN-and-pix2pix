@@ -749,7 +749,7 @@ class Unet3dSkipConnectionBlock(nn.Module):
                                         kernel_size=4, stride=2,
                                         padding=1)
             down = [downconv]
-            up = [uprelu, upconv, nn.Sigmoid()]
+            up = [uprelu, upconv, nn.Tanh()]
             model = down + [submodule] + up
             #print('outermost upconv')
         elif innermost:
