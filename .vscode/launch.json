@@ -8,23 +8,24 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["--dataroot", "C:/Users/bekve/OneDrive/Documents/School/PostGrad Stuff/Semester 5/Master Thesis/Data/cooling2000_hdf5", 
+            "args": ["--dataroot", "C:/Users/bekve/OneDrive/Documents/School/PostGrad Stuff/Semester 5/Master Thesis/Data/obstcool_hdf5", 
             "--name", "3dtrial", 
             "--model", "pix2pix", 
             "--netG", "unet3d", 
             "--netD", "basic3d", 
             "--norm", "instance3d", 
             "--input_nc", "1", 
-            "--output_nc", "1", 
+            "--output_nc", "3", 
             "--display_id", "-1", 
-            "--direction", "BtoA", 
+            "--direction", "AtoB", 
             "--gpu_ids", "-1", 
             "--n_epochs", "1", 
             "--n_epochs_decay", "1", 
             "--preprocess", "none", 
-            "--dataset_mode", "threed", 
+            "--dataset_mode", "threedUVW", 
             "--print_freq", "1",
-			"--batch_size", "1"]
+			"--batch_size", "1",
+            "--data_size", "64"]
 
 
 

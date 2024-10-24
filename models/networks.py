@@ -859,9 +859,9 @@ class NLayer3dDiscriminator(nn.Module):
     
 ## 3D Mass Balance Loss
 class Umass3D(nn.Module):
-    def __init__(self):
+    def __init__(self, data_size):
         super(Umass3D, self).__init__()
-        self.coef = torch.tensor((1/(1*(32-2)*(32-2)*(32-2))))
+        self.coef = torch.tensor((1/(1*(data_size-2)*(data_size-2)*(data_size-2))))
 
     def forward(self,fake_data,real_data):
         fake_data = torch.Tensor.permute(fake_data, (2,3,4,0,1))

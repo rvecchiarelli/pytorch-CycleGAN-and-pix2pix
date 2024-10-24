@@ -37,6 +37,8 @@ class BaseOptions():
         parser.add_argument('--init_type', type=str, default='normal', help='network initialization [normal | xavier | kaiming | orthogonal]')
         parser.add_argument('--init_gain', type=float, default=0.02, help='scaling factor for normal, xavier and orthogonal.')
         parser.add_argument('--no_dropout', action='store_true', help='no dropout for the generator')
+        ##
+        parser.add_argument('--data_size', type=int, default=32, help='size of the data in one dimension (for size 3x32x32x32, data_size=32)')
         # dataset parameters
         parser.add_argument('--dataset_mode', type=str, default='unaligned', help='chooses how datasets are loaded. [unaligned | aligned | single | colorization]')
         parser.add_argument('--direction', type=str, default='AtoB', help='AtoB or BtoA')
