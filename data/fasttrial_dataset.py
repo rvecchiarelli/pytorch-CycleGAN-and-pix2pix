@@ -22,7 +22,7 @@ import numpy as np
 
 
 
-class Fasttrial(BaseDataset):
+class FasttrialDataset(BaseDataset):
     """A template dataset class for you to implement custom datasets."""
     @staticmethod
     def modify_commandline_options(parser, is_train):
