@@ -79,7 +79,7 @@ def save_images_hdf5(webpage, visuals, image_path, aspect_ratio=1.0, width=256, 
         txts.append(label)
         links.append(image_name)
         if use_wandb:
-            ims_dict[label] = wandb.Table(data=im)
+            ims_dict[label] = wandb.Table(columns=None, data=im)
     webpage.add_images(ims, txts, links, width=width)
     if use_wandb:
         wandb.log(ims_dict)
