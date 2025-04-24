@@ -16,7 +16,7 @@
             "--norm", "instance3d", 
             "--input_nc", "1", 
             "--output_nc", "3", 
-            "--display_id", "-1", 
+            "--display_id", "1", 
             "--direction", "AtoB", 
             "--gpu_ids", "-1", 
             "--n_epochs", "1", 
@@ -25,7 +25,8 @@
             "--dataset_mode", "threedUVW", 
             "--print_freq", "1",
 			"--batch_size", "1",
-            "--data_size", "64"]
+            "--data_size", "64",
+            "--use_wandb", "--wandb_project_name", "wandb test"]
 
 
 
